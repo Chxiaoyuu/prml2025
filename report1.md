@@ -4,6 +4,7 @@
 
 ### 原理公式
 通过最小化**残差平方和（RSS）​**求解参数：
+
 $$ J(\theta) = \frac{1}{2m} \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)})^2 $$
 其中假设函数为线性组合：
 $$ h_\theta(x) = \theta_0 + \theta_1x = \theta^T X $$
