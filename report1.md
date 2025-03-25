@@ -134,11 +134,11 @@ $$
 
 其中：
 
-- $ d $: 多项式次数（Degree）
+-  $ d $ : 多项式次数（Degree）
   
-- $ \theta = [\theta_0, \theta_1, ..., \theta_d]^T $: 待求参数向量
+-  $ \theta = [\theta_0, \theta_1, ..., \theta_d]^T $ : 待求参数向量
   
-- $ \epsilon $: 随机误差项
+-  $ \epsilon $ : 随机误差项
 
 ### 2.2 矩阵表示
 将m个样本表示为矩阵形式：
