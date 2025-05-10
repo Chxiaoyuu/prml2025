@@ -11,35 +11,74 @@
 
 ## 3. LSTM结构原理
 
-LSTM单元通过三个门控机制实现记忆控制：
+### LSTM 数学公式
 
-​**遗忘门**​：
+#### 核心组件公式
 
-$$ f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f) $$
-
-​**输入门**​：
-
-$$ i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i) $$
-
-
-$$\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C) $$
-
-
-​**细胞状态更新**​：
-
-$$ C_t = f_t \circ C_{t-1} + i_t \circ \tilde{C}_t $$
-
-​**输出门**​：
+##### 1. 遗忘门 (Forget Gate)
 
 $$
-o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o) \\
-h_t = o_t \circ \tanh(C_t)
+f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)
 $$
 
-其中：
-- $\sigma$ 为sigmoid激活函数
-- $\circ$ 表示Hadamard积
-- $W$ 为权重矩阵， $b$ 为偏置项
+##### 2. 输入门 (Input Gate)
+
+$$
+i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)
+$$
+
+##### 3. 候选细胞状态 (Candidate Cell State)
+
+$$
+\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)
+$$
+
+##### 4. 细胞状态更新 (Cell State Update)
+
+$$
+C_t = f_t \odot C_{t-1} + i_t \odot \tilde{C}_t
+$$
+
+##### 5. 输出门 (Output Gate)
+
+$$
+o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)
+$$
+
+##### 6. 隐藏状态输出 (Hidden State Update)
+
+$$
+h_t = o_t \odot \tanh(C_t)
+$$
+
+
+#### 符号说明
+
+| 符号         | 描述                          | 维度                     |
+|--------------|-------------------------------|--------------------------|
+| $x_t$        | 当前时间步输入向量            | $(d_{in},)$              |
+| $h_{t-1}$    | 前一时间步隐藏状态            | $(d_{hidden},)$          |
+| $C_{t-1}$    | 前一时间步细胞状态            | $(d_{hidden},)$          |
+| $W_*$        | 权重矩阵 (f,i,C,o 对应不同门) | $(d_{hidden}, d_{in}+d_{hidden})$ |
+| $b_*$        | 偏置项                        | $(d_{hidden},)$          |
+| $\sigma$     | Sigmoid 激活函数              | $\sigma(x) = \frac{1}{1+e^{-x}}$ |
+| $\odot$      | Hadamard 积 (逐元素相乘)      |                          |
+
+
+
+#### 公式流程说明
+```mermaid
+graph TD
+    A[输入 h_{t-1}, x_t] --> B[计算遗忘门 f_t]
+    A --> C[计算输入门 i_t]
+    A --> D[计算候选状态 ~C_t]
+    B --> E[细胞状态更新 C_t]
+    C --> E
+    D --> E
+    A --> F[计算输出门 o_t]
+    E --> G[计算新隐藏状态 h_t]
+    F --> G
+```
 
 ## 4. 实验配置
 ### 4.1 模型参数
