@@ -20,6 +20,7 @@ $$ f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f) $$
 ​**输入门**​：
 
 $$ i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i) $$
+
 $$ tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C) $$
 
 ​**细胞状态更新**​：
@@ -36,7 +37,7 @@ $$
 其中：
 - $\sigma$ 为sigmoid激活函数
 - $\circ$ 表示Hadamard积
-- $W$ 为权重矩阵，$b$ 为偏置项
+- $W$ 为权重矩阵， $b$ 为偏置项
 
 ## 4. 实验配置
 ### 4.1 模型参数
