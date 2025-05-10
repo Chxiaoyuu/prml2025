@@ -19,7 +19,8 @@ $$ f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f) $$
 
 ​**输入门**​：
 
-$$ i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i) \\\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C) $$
+$$ i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i) $$
+$$ tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C) $$
 
 ​**细胞状态更新**​：
 
