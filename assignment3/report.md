@@ -88,6 +88,49 @@ graph TD
 - 成滞后特征：pollution_lag{1,2,3}
 - 归一化​：使用MinMaxScaler将数据缩放到[0,1]区间
 
+### 5.2 模型训练过程
+
+**核心训练代码**
+```python
+{
+    history = model.fit(
+    X_train, y_train,
+    validation_split=0.2,
+    callbacks=[EarlyStopping(monitor='val_loss', patience=5)],
+    verbose=1
+}
+```
+
+### 5.3 评估指标计算
+
+​**指标计算公式​：**
+
+
+
+- 平均绝对误差（MAE）
+
+$$
+\text{MAE} = \frac{1}{n} \sum_{i=1}^{n} |y_{\text{true}}^{(i)} - y_{\text{pred}}^{(i)}|
+$$
+
+- 均方根误差（RMSE）
+
+$$
+\text{RMSE} = \sqrt{\frac{1}{n} \sum_{i=1}^{n} \left(y_{\text{true}}^{(i)} - y_{\text{pred}}^{(i)}\right)^2}
+$$
+
+- 决定系数（R²）
+
+$$
+R^2 = 1 - \frac{\sum_{i=1}^{n} \left(y_{\text{true}}^{(i)} - y_{\text{pred}}^{(i)}\right)^2}{\sum_{i=1}^{n} \left(y_{\text{true}}^{(i)} - \bar{y}_{\text{true}}\right)^2}
+$$
+
+
+​**指标特点**​：
+- ​MAE: 对异常值不敏感，反映平均绝对误差
+- ​RMSE: 放大较大误差的影响，单位与原始数据一致
+- ​R²: 取值区间为 $(-\infty, 1]$ ，越接近1说明模型解释力越强
+
 ## 6. 实验结果
 ### 6.1 训练过程曲线
 
