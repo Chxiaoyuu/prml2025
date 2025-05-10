@@ -29,7 +29,7 @@ $$
 
 ##### 3. 候选细胞状态 (Candidate Cell State)
 
-`$$\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)$$`
+$\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)$
 
 ##### 4. 细胞状态更新 (Cell State Update)
 
